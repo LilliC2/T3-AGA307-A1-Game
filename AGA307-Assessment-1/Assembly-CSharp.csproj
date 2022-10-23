@@ -56,10 +56,20 @@
     <Analyzer Include="C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\Singleton.cs" />
+    <Compile Include="Assets\Scripts\Projectile.cs" />
+    <Compile Include="Assets\Scripts\FiringPoint.cs" />
+    <Compile Include="Assets\Scripts\DoorTrigger.cs" />
+    <Compile Include="Assets\Scripts\RaycastTrigger.cs" />
+    <Compile Include="Assets\Scripts\Target.cs" />
     <Compile Include="Assets\Scripts\MouseLook.cs" />
     <Compile Include="Assets\Scripts\PlayerMovement.cs" />
     <Compile Include="Assets\Scripts\TriggerPad.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\Particles\Shaders\RotoParticleAdditive.shader" />
+    <None Include="Assets\Projectiles\Shaders\Additive_Scroll01.shader" />
+    <None Include="Assets\Triple Dungeon Pack\Blue Dungeon\Data\blue dungeon_ReadMe.txt" />
+    <None Include="Assets\Projectiles\Shaders\ParticlesABMobile_Scroll.shader" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
