@@ -336,11 +336,14 @@
 -r:"Library/Bee/artifacts/1900b0aE.dag/UnityEngine.UI.ref.dll"
 "Assets/Scripts/DoorTrigger.cs"
 "Assets/Scripts/FiringPoint.cs"
+"Assets/Scripts/GameManager.cs"
 "Assets/Scripts/MouseLook.cs"
 "Assets/Scripts/PlayerMovement.cs"
 "Assets/Scripts/Projectile.cs"
 "Assets/Scripts/RaycastTrigger.cs"
+"Assets/Scripts/Singleton.cs"
 "Assets/Scripts/Target.cs"
+"Assets/Scripts/TargetManager.cs"
 "Assets/Scripts/TriggerPad.cs"
 -langversion:9.0
 

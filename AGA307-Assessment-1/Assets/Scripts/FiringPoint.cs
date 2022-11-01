@@ -4,20 +4,34 @@ using UnityEngine;
 
 public class FiringPoint : MonoBehaviour
 {
-    public GameObject projectilePrefab;
+    
     public GameObject hitSparks;
     public float projectileSpeed = 1000f;
     public LineRenderer laser;
     public GameObject gunType;
+
+    
+    public GameObject[] projectileType;
+
+    int fireType;
+
 
     public bool hitSphere;
 
     // Update is called once per frame
     void Update()
     {
+
+        //player changing gun projectile
+        if (Input.GetKeyDown(KeyCode.Alpha1)) fireType = 0;
+        else if (Input.GetKeyDown(KeyCode.Alpha2)) fireType = 1;
+        else if (Input.GetKeyDown(KeyCode.Alpha3)) fireType = 2;
+
         if (Input.GetButtonDown("Fire1"))
         {
-            FireRigidProjectile();
+            
+
+            FireRigidProjectile(fireType);
             gunType.GetComponent<Renderer>().material.color = Color.blue;
 
         }
@@ -30,14 +44,15 @@ public class FiringPoint : MonoBehaviour
 
     }
 
-    void FireRigidProjectile()
+    void FireRigidProjectile(int _type)
     {
+        print(_type);
         //create a reference to hold our instantatied object
         //GameObject projectileInstance;
 
         //instantiate our projectile pregab at this object's position and
         //rotation
-        GameObject projectileInstance = Instantiate(projectilePrefab, transform.position, transform.rotation);
+        GameObject projectileInstance = Instantiate(projectileType[_type], transform.position, transform.rotation);
 
         //get the rigidbody attached to the projectile and add force to it
         projectileInstance.GetComponent<Rigidbody>().AddForce(transform.forward * projectileSpeed);
