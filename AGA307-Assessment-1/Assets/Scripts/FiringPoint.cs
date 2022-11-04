@@ -10,26 +10,47 @@ public class FiringPoint : MonoBehaviour
     public LineRenderer laser;
     public GameObject gunType;
 
+    UIManager _UI;
     
     public GameObject[] projectileType;
 
     int fireType;
+    public string gunTypeName;
 
 
     public bool hitSphere;
+
+    private void Start()
+    {
+        _UI = FindObjectOfType<UIManager>();
+        gunTypeName = "Blue Ball";
+        _UI.UpdateGunType(gunTypeName);
+    }
 
     // Update is called once per frame
     void Update()
     {
 
         //player changing gun projectile
-        if (Input.GetKeyDown(KeyCode.Alpha1)) fireType = 0;
-        else if (Input.GetKeyDown(KeyCode.Alpha2)) fireType = 1;
-        else if (Input.GetKeyDown(KeyCode.Alpha3)) fireType = 2;
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            fireType = 0;
+            
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            fireType = 1;
+            gunTypeName = "Fireball";
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            fireType = 2;
+            gunTypeName = "Green Orb";
+        }
 
         if (Input.GetButtonDown("Fire1"))
         {
-            
+           
 
             FireRigidProjectile(fireType);
             gunType.GetComponent<Renderer>().material.color = Color.blue;
@@ -40,13 +61,14 @@ public class FiringPoint : MonoBehaviour
         {
             FireRayCast();
             gunType.GetComponent<Renderer>().material.color = Color.red;
+            gunTypeName = "Laser";
         }
 
+        _UI.UpdateGunType(gunTypeName);
     }
 
     void FireRigidProjectile(int _type)
     {
-        print(_type);
         //create a reference to hold our instantatied object
         //GameObject projectileInstance;
 
@@ -69,6 +91,8 @@ public class FiringPoint : MonoBehaviour
 
             laser.SetPosition(0, transform.position);
             laser.SetPosition(1, hit.point);
+            StopAllCoroutines();
+            StartCoroutine(StopLaser());
             GameObject party = Instantiate(hitSparks, hit.point, hit.transform.rotation);
             Destroy(party, 2);
         }
@@ -78,8 +102,14 @@ public class FiringPoint : MonoBehaviour
             hitSphere = true;
         }
         else hitSphere = false;
+
     }
 
-
+    IEnumerator StopLaser()
+    {
+        laser.gameObject.SetActive(true);
+        yield return new WaitForSeconds(0.5f);
+        laser.gameObject.SetActive(false);
+    }
 }
 

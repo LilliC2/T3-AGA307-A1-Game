@@ -111,3 +111,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetHealth: 20
+  size: 0
+  difficulty: 0
+  baseSize: {x: 0, y: 0, z: 0}
+  targetShape: 1
+  moveToPos: {fileID: 0}

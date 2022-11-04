@@ -345,6 +345,7 @@
 "Assets/Scripts/Target.cs"
 "Assets/Scripts/TargetManager.cs"
 "Assets/Scripts/TriggerPad.cs"
+"Assets/Scripts/UIManager.cs"
 -langversion:9.0
 
 /deterministic
