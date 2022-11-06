@@ -24,7 +24,9 @@ public class RaycastTrigger : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            if (_FP.hitSphere == true && Input.GetKeyDown(KeyCode.E)) cycle++; 
+            if (_FP.hitSphere == true && Input.GetKeyDown(KeyCode.E)) cycle++;
+
+            print(cycle);
 
             switch(cycle)
             {

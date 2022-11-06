@@ -18,6 +18,7 @@ public class Target : MonoBehaviour
 
     public GameObject player;
     Vector3 playerPos;
+    string currentDifficulty;
 
     public Transform moveToPos;    //need for random patrol
     Transform startPos;     //need for loop patrol
@@ -30,14 +31,21 @@ public class Target : MonoBehaviour
         _GM = FindObjectOfType<GameManager>();
         player = GameObject.Find("FP Player");
 
+
+        currentDifficulty = _GM.difficulty.ToString();
         SetUp();
         SetUpAI();
         StartCoroutine(Move());
+        baseSize = this.transform.localScale;
 
-        
     }
 
-    void SetUp()
+    private void Awake()
+    {
+        baseSize = this.transform.localScale;
+    }
+
+    public void SetUp()
     {
         //print(difficulty);
 
@@ -46,18 +54,21 @@ public class Target : MonoBehaviour
             case Difficulty.Easy:
                 size = 2;
                 mySpeed = 1;
+                this.GetComponent<Renderer>().material.color = Color.red;
                 break;
             case Difficulty.Medium:
                 size = 1;
                 mySpeed = 3;
+                this.GetComponent<Renderer>().material.color = Color.yellow;
                 break;
             case Difficulty.Hard:
                 size = 0.5f;
                 mySpeed = 5;
+                this.GetComponent<Renderer>().material.color = Color.green;
                 break;
         }
 
-        baseSize = this.transform.localScale;
+
 
 
         this.transform.localScale = baseSize * size;
@@ -121,6 +132,36 @@ public class Target : MonoBehaviour
         playerPos = player.transform.localPosition;
         this.transform.LookAt(playerPos);
 
-        
+        if(currentDifficulty != _GM.difficulty.ToString())
+        {
+            SetUp();
+            currentDifficulty = _GM.difficulty.ToString();
+        }
+
+        if(Input.GetKeyDown(KeyCode.R))
+        {
+            float[] sizeArray = { 0.5f, 1, 2 };
+
+            int r = Random.Range(0,2);
+
+            size = sizeArray[r];
+            print(size);
+            this.transform.localScale = baseSize * size;
+            switch(size)
+            {
+                case 0.5f:
+                    this.GetComponent<Renderer>().material.color = Color.green;
+                    break;
+                case 1:
+                    this.GetComponent<Renderer>().material.color = Color.yellow;
+                    break;
+                case 2:
+                    this.GetComponent<Renderer>().material.color = Color.red;
+                    break;
+
+            }    
+
+        }
+
     }
 }

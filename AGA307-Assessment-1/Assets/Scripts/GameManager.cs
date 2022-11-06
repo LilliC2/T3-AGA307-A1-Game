@@ -26,7 +26,6 @@ public class GameManager : Singleton<GameManager>
         _UI = FindObjectOfType<UIManager>();
         SetUp();
 
-        
     }
 
     private void Update()
@@ -35,6 +34,7 @@ public class GameManager : Singleton<GameManager>
         {
             timer -= Time.deltaTime;
             _UI.TimerUpdate(timer);
+            _UI.UpdateTimerWheelRemove(timer);
 
         }
 
@@ -43,6 +43,8 @@ public class GameManager : Singleton<GameManager>
         if (Input.GetKeyDown(KeyCode.Keypad2)) difficulty = Difficulty.Medium;
         if (Input.GetKeyDown(KeyCode.Keypad3)) difficulty = Difficulty.Hard;
         if (gameState == GameState.Playing) _UI.UpdateDifficulty(difficulty);
+        SetUp();
+        
     }
     
     public void ScoreCalcuation(int _score)
@@ -56,6 +58,7 @@ public class GameManager : Singleton<GameManager>
     {
         print("5 SECONDS ADDED");
         timer += bonusTime;
+        _UI.UpdateTimerWheelAdd();
     }
 
     void SetUp()
